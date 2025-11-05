@@ -40,7 +40,7 @@ namespace VintageCashCow.ProductPricing.Tests.IntegrationTests
             _productServiceMock.Setup(s => s.GetProductsAsync()).ReturnsAsync(products);
 
             // Act
-            var response = await _client.GetAsync("api/Product");
+            var response = await _client.GetAsync("api/Products");
 
             // Assert
             response.EnsureSuccessStatusCode();
@@ -57,7 +57,7 @@ namespace VintageCashCow.ProductPricing.Tests.IntegrationTests
             _productServiceMock.Setup(s => s.GetProductByIdAsync(1)).ReturnsAsync(product);
 
             // Act
-            var response = await _client.GetAsync("api/Product/1");
+            var response = await _client.GetAsync("api/Products/1");
 
             // Assert
             response.EnsureSuccessStatusCode();
@@ -73,7 +73,7 @@ namespace VintageCashCow.ProductPricing.Tests.IntegrationTests
             _productServiceMock.Setup(s => s.GetProductByIdAsync(It.IsAny<int>())).ThrowsAsync(new ProductNotFoundException("Product not found"));
 
             // Act
-            var response = await _client.GetAsync("api/Product/999");
+            var response = await _client.GetAsync("api/Products/999");
 
             // Assert
             Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.NotFound));
@@ -89,7 +89,7 @@ namespace VintageCashCow.ProductPricing.Tests.IntegrationTests
             _productServiceMock.Setup(s => s.ApplyDiscountAsync(It.IsAny<DiscountDto>())).ReturnsAsync(resultDto);
 
             // Act
-            var response = await _client.PostAsJsonAsync("api/Product/1/apply-discount", request);
+            var response = await _client.PostAsJsonAsync("api/Products/1/apply-discount", request);
 
             // Assert
             response.EnsureSuccessStatusCode();
@@ -106,7 +106,7 @@ namespace VintageCashCow.ProductPricing.Tests.IntegrationTests
             _productServiceMock.Setup(s => s.ApplyDiscountAsync(It.IsAny<DiscountDto>())).ThrowsAsync(new InvalidDiscountException("Invalid discount"));
 
             // Act
-            var response = await _client.PostAsJsonAsync("api/Product/1/apply-discount", request);
+            var response = await _client.PostAsJsonAsync("api/Products/1/apply-discount", request);
 
             // Assert
             Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.BadRequest));
@@ -122,7 +122,7 @@ namespace VintageCashCow.ProductPricing.Tests.IntegrationTests
             _productServiceMock.Setup(s => s.UpdateProductPriceAsync(It.IsAny<UpdatePriceDto>())).ReturnsAsync(updatedProduct);
 
             // Act
-            var response = await _client.PutAsJsonAsync("api/Product/1/update-price", request);
+            var response = await _client.PutAsJsonAsync("api/Products/1/update-price", request);
 
             // Assert
             response.EnsureSuccessStatusCode();
@@ -139,7 +139,7 @@ namespace VintageCashCow.ProductPricing.Tests.IntegrationTests
             _productServiceMock.Setup(s => s.UpdateProductPriceAsync(It.IsAny<UpdatePriceDto>())).ThrowsAsync(new InvalidPriceException("Invalid price"));
 
             // Act
-            var response = await _client.PutAsJsonAsync("api/Product/1/update-price", request);
+            var response = await _client.PutAsJsonAsync("api/Products/1/update-price", request);
 
             // Assert
             Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.BadRequest));
