@@ -26,4 +26,8 @@
     <InternalsVisibleTo Include="VintageCashCow.ProductPricing.Tests" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="logs\" />
+  </ItemGroup>
+
 </Project>

@@ -1,0 +1,55 @@
+@using System.Globalization
+@using Microsoft.AspNetCore.Components.Forms
+@using MudBlazor
+@using VintageCashCow.Application
+@using VintageCashCow.WebUI.Server.Components.Shared
+@using VintageCashCow.WebUI.Server.Mappers
+@using VintageCashCow.WebUI.Server.Models
+
+<div style="display: flex; gap: 16px; align-items: center; flex-wrap: wrap;">
+    <EditForm Model="@Product.PriceUpdate" OnValidSubmit="UpdatePrice" style="flex: 1; min-width: 250px;">
+        <DataAnnotationsValidator />
+        <div style="display: flex; gap: 8px; align-items: center;">
+            <MudNumericField @bind-Value="Product.PriceUpdate.NewPrice"
+                             For="() => Product.PriceUpdate.NewPrice"
+                             Label="New Price"
+                             Variant="Variant.Outlined"
+                             Margin="Margin.Dense"
+                             Adornment="Adornment.Start"
+                             AdornmentIcon="@Icons.Material.Filled.CurrencyPound"
+                             Style="flex: 1; min-width: 120px;" />
+            <MudButton ButtonType="ButtonType.Submit"
+                       Variant="Variant.Filled"
+                       Color="Color.Primary"
+                       Style="height: 40px;">
+                Update
+            </MudButton>
+        </div>
+    </EditForm>
+
+    <EditForm Model="@Product.DiscountUpdate" OnValidSubmit="ApplyDiscount" style="flex: 1; min-width: 250px;">
+        <DataAnnotationsValidator />
+        <div style="display: flex; gap: 8px; align-items: center;">
+            <MudNumericField @bind-Value="Product.DiscountUpdate.Discount"
+                             For="() => Product.DiscountUpdate.Discount"
+                             Label="Discount %"
+                             Variant="Variant.Outlined"
+                             Margin="Margin.Dense"
+                             Style="flex: 1; min-width: 120px;" />
+            <MudButton ButtonType="ButtonType.Submit"
+                       Variant="Variant.Filled"
+                       Color="Color.Secondary"
+                       Style="height: 40px;">
+                Apply
+            </MudButton>
+        </div>
+    </EditForm>
+
+    <MudButton OnClick="ShowPriceHistory"
+               Variant="Variant.Text"
+               Color="Color.Info"
+               Style="white-space: nowrap;">
+        <MudIcon Icon="@Icons.Material.Filled.History" />
+        <span style="margin-left: 4px;">History</span>
+    </MudButton>
+</div>

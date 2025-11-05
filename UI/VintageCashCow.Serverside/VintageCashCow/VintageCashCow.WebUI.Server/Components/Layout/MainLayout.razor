@@ -1,0 +1,19 @@
+﻿@inherits LayoutComponentBase
+@inject NavigationManager NavigationManager
+@using VintageCashCow.WebUI.Server.Components.Shared
+
+<MudThemeProvider Theme="VintageCashCowTheme.Theme" />
+<MudDialogProvider />
+<MudSnackbarProvider />
+<MudPopoverProvider />
+
+<MudLayout>
+    <MudAppBar Elevation="1">
+        <MudImage Src="/images/logo.png" Alt="Vintage Cash Cow" Style="height: 56px; margin-left: 12px;" />
+    </MudAppBar>
+    <MudMainContent>
+        <MudContainer MaxWidth="MaxWidth.Large" Class="my-4 pt-4">
+            @Body
+        </MudContainer>
+    </MudMainContent>
+</MudLayout>
