@@ -112,17 +112,15 @@ namespace VintageCashCow.ProductPricing.Application.Services
         }
 
         /// <summary>
-        /// Applies a discount to a product based on the provided discount details.
+        /// Applies a discount to a product based on the specified discount details.
         /// </summary>
-        /// <remarks>This method retrieves the product by its ID, validates the discount percentage, and
-        /// calculates the discounted price. If the product is not found, or if the discount percentage is invalid, an
-        /// exception is thrown.</remarks>
-        /// <param name="dto">An object containing the discount details, including the product ID and the discount percentage. The <see
-        /// cref="DiscountDto.DiscountPercentage"/> must be between 0 and 100.</param>
-        /// <returns>An <see cref="AppliedDiscountDto"/> containing the product details and the newly calculated discounted
-        /// price.</returns>
-        /// <exception cref="InvalidDiscountException">Thrown if the <see cref="DiscountDto.DiscountPercentage"/> is less than 0 or greater than 100.</exception>
-        /// <exception cref="ProductNotFoundException">Thrown if no product is found with the specified <see cref="DiscountDto.ProductId"/>.</exception>
+        /// <remarks>The discount percentage must be between 0 and 100, inclusive. If the specified
+        /// product does not exist, or if the discount percentage is invalid, an exception is thrown.</remarks>
+        /// <param name="dto">An object containing the discount details, including the product ID and the discount percentage.</param>
+        /// <returns>An <see cref="AppliedDiscountDto"/> object containing the original price, the discounted price, and other
+        /// relevant details.</returns>
+        /// <exception cref="InvalidDiscountException">Thrown if the discount percentage is less than 0 or greater than 100.</exception>
+        /// <exception cref="ProductNotFoundException">Thrown if the product with the specified ID does not exist.</exception>
         public async Task<AppliedDiscountDto> ApplyDiscountAsync(DiscountDto dto)
         {
             _logger.LogInformation("Applying discount for product with id {ProductId}", dto.ProductId);
