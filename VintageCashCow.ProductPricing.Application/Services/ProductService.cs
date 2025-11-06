@@ -146,6 +146,7 @@ namespace VintageCashCow.ProductPricing.Application.Services
             product.LastUpdated = DateTime.UtcNow;
 
             await _productRepository.UpdateAsync(product);
+            _logger.LogInformation("Price updated successfully for product with id {ProductId}", dto.ProductId);
 
             return product.ToAppliedDiscountDto(originalPrice, discountedPrice);
         }
